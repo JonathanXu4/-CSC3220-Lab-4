@@ -193,9 +193,9 @@ QPushButton {background-color: rgb(155, 155, 255)}</string>
    <widget class="QLabel" name="humidLabel">
     <property name="geometry">
      <rect>
-      <x>1070</x>
+      <x>1060</x>
       <y>900</y>
-      <width>201</width>
+      <width>221</width>
       <height>46</height>
      </rect>
     </property>
@@ -206,7 +206,7 @@ QPushButton {background-color: rgb(155, 155, 255)}</string>
      </font>
     </property>
     <property name="text">
-     <string/>
+     <string>humidity: 43.67</string>
     </property>
    </widget>
    <widget class="QWidget" name="">
