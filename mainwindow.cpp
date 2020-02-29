@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(changeImage()));
 
     setCurrentTime();
+    changeImage();
     timer->start(1000);
     imageTimer->start(10000);
 
