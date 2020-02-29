@@ -3,9 +3,10 @@
 
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QTimeZone>
 
 int imageNum = 0;
-QString zone = "pt";
+QString zone = "UTC";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -40,6 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(httpManager, SIGNAL(IconReady(QPixmap *)),
             this, SLOT(processIcon(QPixmap *)));
 
+    connect(httpManager, SIGNAL(TimeJsonReady(QJsonObject *)),
+                this, SLOT(processTimeJson(QJsonObject *)));
+
     QString zip = ui->zipcodeEdit->text();
     httpManager->sendImageRequest(zip);
     httpManager->sendWeatherRequest(zip);
@@ -60,22 +64,11 @@ void MainWindow::setCurrentTime()
     ui->hourNum->display(hour);
     ui->minNum->display(minute);
     ui->secNum->display(second);
-    qDebug() << time.toString("t");
 }
 
 void MainWindow::setGlobalTime()
 {
-    QTime time = QTime::currentTime();
-    QString hour = time.toString("hh");
-    QString minute = time.toString("mm");
-    QString second = time.toString("ss");
-    QTime gTime = QTime::fromString(hour + minute + second,"");
-
-
-    ui->hourNum->display(hour);
-    ui->minNum->display(minute);
-    ui->secNum->display(second);
-    qDebug() << time.toString("t");
+    httpManager->sendTimeRequest(zone);
 }
 
 void MainWindow::changeImage()
@@ -101,25 +94,13 @@ void MainWindow::processIcon(QPixmap *image)
 void MainWindow::processWeatherJson(QJsonObject *json)
 {
     qDebug() << "Json ready";
-    QString weather = json->value("weather").toArray()[0].toObject()["main"].toString();
-    QString weatherDesc = json->value("weather").toArray()[0].toObject()["description"].toString();
     QString icon = json->value("weather").toArray()[0].toObject()["icon"].toString();
     double temp = json->value("main").toObject()["temp"].toDouble();
-    double temp_min = json->value("main").toObject()["temp_min"].toDouble();
-    double temp_max = json->value("main").toObject()["temp_max"].toDouble();
     double humidity = json->value("main").toObject()["humidity"].toDouble();
-
-
-    qDebug() << weather;
-    qDebug() << weatherDesc;
-    qDebug() << temp;
-    qDebug() << temp_min;
-    qDebug() << temp_max;
-    qDebug() << humidity;
 
     httpManager->sendIconRequest(icon);
     ui->weatherLabel->setText(QString::number(temp) + "°");
-    //ui->weatherLabel->setText("Current Weather: " + weather + ", temp: " + QString::number(temp));
+    ui->humidLabel->setText("humidity: " + QString::number(humidity) + "°");
 
     /*
      * {
@@ -141,10 +122,23 @@ void MainWindow::processWeatherJson(QJsonObject *json)
      * */
 }
 
+void MainWindow::processTimeJson(QJsonObject *json)
+{
+    QString time = json->value("time_24").toString();
+    ui->gHour->display(QString(time.at(0)) + QString(time.at(1)));
+    ui->gMin->display(QString(time.at(3)) + QString(time.at(4)));
+    ui->gSec->display(QString(time.at(6)) + QString(time.at(7)));
+}
+
 void MainWindow::on_updateButton_clicked()
 {
     QString zip = ui->zipcodeEdit->text();
     qDebug() << zip;
     httpManager->sendImageRequest(zip);
     httpManager->sendWeatherRequest(zip);
+}
+
+void MainWindow::on_timeUp_clicked()
+{
+    zone = ui->upBox->text();
 }

@@ -6,7 +6,8 @@ HTTPManager::HTTPManager(QObject *parent) :
     QObject(parent),
     imageDownloadManager(new QNetworkAccessManager),
     weatherAPIManager(new QNetworkAccessManager),
-    iconDownloadManager(new QNetworkAccessManager)
+    iconDownloadManager(new QNetworkAccessManager),
+    timeDownloadManager(new QNetworkAccessManager)
 {
     connect(imageDownloadManager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(ImageDownloadedHandler(QNetworkReply*)));
@@ -16,6 +17,9 @@ HTTPManager::HTTPManager(QObject *parent) :
 
     connect(iconDownloadManager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(IconDownloadedHandler(QNetworkReply*)));
+
+    connect(timeDownloadManager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(TimeDownloadedHandler(QNetworkReply*)));
 }
 
 HTTPManager::~HTTPManager()
@@ -58,6 +62,14 @@ void HTTPManager::sendIconRequest(QString icon)
     request.setUrl(QUrl(address));
     iconDownloadManager->get(request);
     qDebug() << "Icon Request Sent to Address " << request.url();
+}
+
+void HTTPManager::sendTimeRequest(QString zone)
+{
+    QNetworkRequest request;
+    QString address = "https://api.ipgeolocation.io/timezone?apiKey=db1f6b667b1c464994039d9b75a2a0cf&tz=" + zone;
+    request.setUrl(QUrl(address));
+    timeDownloadManager->get(request);
 }
 
 // After receving the image
@@ -109,4 +121,21 @@ void HTTPManager::IconDownloadedHandler(QNetworkReply *reply)
     image->loadFromData(reply->readAll());
 
     emit IconReady(image);
+}
+
+// After receving the time
+void HTTPManager::TimeDownloadedHandler(QNetworkReply *reply)
+{
+    if (reply->error()) {
+        qDebug() << reply->errorString();
+        return;
+    }
+
+    QString answer = reply->readAll();
+    reply->deleteLater();
+
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(answer.toUtf8());
+    QJsonObject *jsonObj = new QJsonObject(jsonResponse.object());
+
+    emit TimeJsonReady(jsonObj);
 }
