@@ -107,7 +107,7 @@ QPushButton {background-color: rgb(155, 155, 255)}</string>
    <widget class="QLabel" name="iconLabel">
     <property name="geometry">
      <rect>
-      <x>1080</x>
+      <x>1070</x>
       <y>720</y>
       <width>150</width>
       <height>150</height>
@@ -122,7 +122,7 @@ QPushButton {background-color: rgb(155, 155, 255)}</string>
      <rect>
       <x>740</x>
       <y>30</y>
-      <width>1140</width>
+      <width>1180</width>
       <height>650</height>
      </rect>
     </property>
@@ -193,9 +193,9 @@ QPushButton {background-color: rgb(155, 155, 255)}</string>
    <widget class="QLabel" name="humidLabel">
     <property name="geometry">
      <rect>
-      <x>1050</x>
+      <x>1070</x>
       <y>900</y>
-      <width>231</width>
+      <width>201</width>
       <height>46</height>
      </rect>
     </property>
@@ -219,6 +219,9 @@ QPushButton {background-color: rgb(155, 155, 255)}</string>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>9</number>
+     </property>
      <item>
       <widget class="QPushButton" name="updateButton">
        <property name="font">
