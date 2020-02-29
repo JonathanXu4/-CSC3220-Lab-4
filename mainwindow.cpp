@@ -5,6 +5,7 @@
 #include <QJsonArray>
 
 int imageNum = 0;
+QString zone = "pt";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(timer, SIGNAL(timeout()),
             this, SLOT(setCurrentTime()));
+
+    connect(timer, SIGNAL(timeout()),
+            this, SLOT(setGlobalTime()));
 
     connect(imageTimer, SIGNAL(timeout()),
             this, SLOT(changeImage()));
@@ -54,9 +58,26 @@ void MainWindow::setCurrentTime()
     QString second = time.toString("ss");
 
     ui->hourNum->display(hour);
-    ui->minNum->display(hour);
+    ui->minNum->display(minute);
     ui->secNum->display(second);
+    qDebug() << time.toString("t");
 }
+
+void MainWindow::setGlobalTime()
+{
+    QTime time = QTime::currentTime();
+    QString hour = time.toString("hh");
+    QString minute = time.toString("mm");
+    QString second = time.toString("ss");
+    QTime gTime = QTime::fromString(hour + minute + second,"");
+
+
+    ui->hourNum->display(hour);
+    ui->minNum->display(minute);
+    ui->secNum->display(second);
+    qDebug() << time.toString("t");
+}
+
 void MainWindow::changeImage()
 {
     QString address = "C:/Users/Chari/Desktop/Qt/Dashboard/images/" + QString::number(imageNum) + ".png";

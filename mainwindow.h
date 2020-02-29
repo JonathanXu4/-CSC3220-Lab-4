@@ -21,6 +21,7 @@ public:
 
 private slots:
     void setCurrentTime();
+    void setGlobalTime();
     void changeImage();
     void processImage(QPixmap *);
     void processWeatherJson(QJsonObject *json);
