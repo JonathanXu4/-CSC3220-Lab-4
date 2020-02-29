@@ -27,6 +27,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(httpManager, SIGNAL(IconReady(QPixmap *)),
             this, SLOT(processIcon(QPixmap *)));
+
+    QString zip = ui->zipcodeEdit->text();
+    httpManager->sendImageRequest(zip);
+    httpManager->sendWeatherRequest(zip);
 }
 
 MainWindow::~MainWindow()
@@ -99,16 +103,10 @@ void MainWindow::processWeatherJson(QJsonObject *json)
      * */
 }
 
-void MainWindow::on_imageButton_clicked()
+void MainWindow::on_updateButton_clicked()
 {
     QString zip = ui->zipcodeEdit->text();
     qDebug() << zip;
     httpManager->sendImageRequest(zip);
-}
-
-void MainWindow::on_weatherButton_clicked()
-{
-    QString zip = ui->zipcodeEdit->text();
-    qDebug() << zip;
     httpManager->sendWeatherRequest(zip);
 }
