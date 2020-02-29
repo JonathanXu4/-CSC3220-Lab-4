@@ -76,7 +76,7 @@ QPushButton {background-color: rgb(155, 155, 255)}</string>
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>40</y>
+      <y>30</y>
       <width>650</width>
       <height>650</height>
      </rect>
@@ -121,8 +121,8 @@ QPushButton {background-color: rgb(155, 155, 255)}</string>
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>40</y>
-      <width>1200</width>
+      <y>30</y>
+      <width>1140</width>
       <height>650</height>
      </rect>
     </property>

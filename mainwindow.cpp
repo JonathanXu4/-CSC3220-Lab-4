@@ -74,7 +74,7 @@ void MainWindow::setGlobalTime()
 void MainWindow::changeImage()
 {
     QString address = "C:/Users/Chari/Desktop/Qt/Dashboard/images/" + QString::number(imageNum) + ".png";
-    ui->pictureLabel->setPixmap(QPixmap(address).scaled(1200,650,Qt::KeepAspectRatio));
+    ui->pictureLabel->setPixmap(QPixmap(address).scaled(1140,650));
     imageNum++;
     if (imageNum == 5) {
         imageNum = 0;
