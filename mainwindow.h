@@ -21,6 +21,7 @@ public:
 
 private slots:
     void setCurrentTime();
+    void changeImage();
     void processImage(QPixmap *);
     void processWeatherJson(QJsonObject *json);
     void processIcon(QPixmap *);
@@ -30,6 +31,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
+    QTimer *imageTimer;
     HTTPManager *httpManager;
 
 };

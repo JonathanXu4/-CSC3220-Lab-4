@@ -4,10 +4,13 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+int imageNum = 0;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     timer(new QTimer),
+    imageTimer(new QTimer),
     httpManager(new HTTPManager)
 {
     ui->setupUi(this);
@@ -15,8 +18,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()),
             this, SLOT(setCurrentTime()));
 
+    connect(imageTimer, SIGNAL(timeout()),
+            this, SLOT(changeImage()));
+
     setCurrentTime();
     timer->start(1000);
+    imageTimer->start(10000);
 
 
     connect(httpManager, SIGNAL(ImageReady(QPixmap *)),
@@ -48,6 +55,15 @@ void MainWindow::setCurrentTime()
     ui->hourNum->display(hour);
     ui->minNum->display(hour);
     ui->secNum->display(second);
+}
+void MainWindow::changeImage()
+{
+    QString address = "C:/Users/Chari/Desktop/Qt/Dashboard/images/" + QString::number(imageNum) + ".png";
+    ui->pictureLabel->setPixmap(QPixmap(address).scaled(1200,650,Qt::KeepAspectRatio));
+    imageNum++;
+    if (imageNum == 5) {
+        imageNum = 0;
+    }
 }
 
 void MainWindow::processImage(QPixmap *image)
