@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>2000</width>
+    <height>1000</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(48, 75, 45);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLCDNumber" name="hourNum">
+    <property name="geometry">
+     <rect>
+      <x>1040</x>
+      <y>750</y>
+      <width>191</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="digitCount">
+     <number>2</number>
+    </property>
+    <property name="intValue" stdset="0">
+     <number>22</number>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="secNum">
+    <property name="geometry">
+     <rect>
+      <x>1440</x>
+      <y>750</y>
+      <width>191</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="digitCount">
+     <number>2</number>
+    </property>
+    <property name="intValue" stdset="0">
+     <number>22</number>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="minNum">
+    <property name="geometry">
+     <rect>
+      <x>1240</x>
+      <y>750</y>
+      <width>191</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="digitCount">
+     <number>2</number>
+    </property>
+    <property name="intValue" stdset="0">
+     <number>22</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="imageLabel">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>60</y>
+      <width>650</width>
+      <height>650</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="imageButton">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>800</y>
+      <width>200</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Image Download Button</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="zipcodeEdit">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>800</y>
+      <width>200</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>98119</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="weatherButton">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>800</y>
+      <width>200</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Weather Download</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="weatherLabel">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>50</y>
+      <width>641</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>150</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>65</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="iconLabel">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>530</y>
+      <width>150</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pictureLabel">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>540</y>
+      <width>150</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>2000</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
